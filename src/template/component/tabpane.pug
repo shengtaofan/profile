@@ -1,0 +1,30 @@
+
+mixin listTabPane({ id='list-tabContent', contents=[] }=[{}])
+  - const slots = slotMap()
+  block
+
+  mixin tabContent({ id } = [{}])
+    - const contentArg = OwnArg(arguments)
+    - const activeCls = contentArg('active', 'active show')
+    .tab-pane.fade(id=`list-${id}` class=activeCls role='tabpanel' aria-labelledby=`list-${id}-list`)
+      block
+
+  .tab-content(id=id)
+    each content in contents
+      +tabContent(content)
+        - slots.use(content.id)
+
+mixin navTabPane({ id='nav-tabContent', contents=[] }=[{}])
+  - const slots = slotMap()
+  block
+
+  mixin tabContent({ id } = [{}])
+    - const contentArg = OwnArg(arguments)
+    - const activeCls = contentArg('active', 'active show')
+    .tab-pane.fade(id=`nav-${id}` class=activeCls role='tabpanel' aria-labelledby=`nav-${id}-tab`)
+      block
+
+  .tab-content(id=id)
+    each content in contents
+      +tabContent(content)
+        - slots.use(content.id)

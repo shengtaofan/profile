@@ -1,0 +1,29 @@
+mixin modal({ id='exampleModal', label='exampleModalLabel', static, scrollable, centered, size, fullscreen, btnNone } = [{}])
+  - const hasArg = OwnArg(arguments)
+  if  !hasArg('btnNone')
+    button.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target=`#${id}`)=`type='button' data-bs-toggle='modal' data-bs-target=#${id}`
+  - const slots = slotMap()
+  block
+  - const backdrop = hasArg('static') ? 'static' : false
+  - const keyboard = hasArg('static') ? 'false' : false
+  - const dialog = 'modal-dialog-'
+  - const scrollableCls = hasArg('scrollable') && `${dialog}scrollable`
+  - const centerCls = hasArg('centered') && `${dialog}centered`
+  - const sizeCls = hasArg('size') && `modal-${size}`
+  - const fullscreenCls = hasArg('fullscreen') ? fullscreen ? `modal-fullscreen-${fullscreen}-down` : hasArg('centered') && `modal-fullscreen` : false
+
+  .modal.fade(id=id data-bs-backdrop=backdrop data-bs-keyboard=keyboard tabindex='-1' aria-labelledby=label aria-hidden='true')
+    .modal-dialog(class=[ scrollableCls, centerCls, sizeCls, fullscreenCls ])
+      .modal-content
+        if slots.header
+          .modal-header
+            mixin title(text)
+              h5.modal-title(id=label)=text
+            - slots.header()
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+        if slots.body
+          .modal-body
+            - slots.body()
+        if slots.footer
+          .modal-footer
+            - slots.footer()

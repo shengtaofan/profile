@@ -1,0 +1,70 @@
+- function attrStr(args, attrs, prifix, replace={})
+  - const newAttrs = {}
+  each val, key in attrs
+    - newAttrs[`${prifix}-${key}`] = args(val) && (replace[key] || 'true')
+  - return newAttrs
+
+- function newline(indent)
+  - let space = '\n'
+  - for(let i = 0; i < indent; i++)
+    - space+= '  '
+  - return space
+
+- function hasStateClass(arg, attrs, prefix)
+  - const result = []
+
+  if Array.isArray(attrs)
+    each attr in attrs
+      if arg(attr)
+        - result.push(prefix ? prefix + attr: attr)
+
+  - return result
+
+- function OwnArg(args)
+  - return function(prop, isTrue=true, isFalse=false)
+    - return args.length && args[0].hasOwnProperty(prop) ? isTrue : isFalse
+
+- function slotMap()
+  - const slots = { use(slotName) { return this[slotName] && this[slotName]() } }
+  mixin slot(name)
+    - slots[name] = block
+  - return slots
+
+- function slotSet()
+  - const slots = []
+  mixin slot(name)
+    - slots.push(block)
+  - return slots
+
+mixin tag( tagname, { text, props } = {})
+
+  - let attrStr = ''
+  each prop, key in props
+    - attrStr += `${key}="${Array.isArray(prop) ? prop.join(' ') : prop}" `
+  if block
+    |<#{tagname} !{attrStr.trim()}>
+    block
+    |</#{tagname}>
+  else
+    |#[#{tagname}&attributes(props) !{text}]
+
+mixin mix()
+  - const slots = slotSet()
+  |
+  block
+  .container
+    each slot in slots
+      - slot()
+
+    //- - slots[0]()
+    //- - slots[2]()
+    //- - slots[1]()
+//- +mix()
+  +slot()
+    header header
+  +slot()
+    p body
+  +slot()
+    footer footer
+  +slot()
+    address footer

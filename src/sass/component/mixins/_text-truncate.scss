@@ -1,0 +1,34 @@
+// Text truncate
+// Requires inline-block or block for proper styling
+
+@mixin text-truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// CSS image replacement
+@mixin text-hide() {
+  // stylelint-disable-next-line font-family-no-missing-generic-family-keyword
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.txt-indent {
+  text-indent: 2em;
+}
+
+.txt-convex {
+  padding-left: 2em;
+  text-indent: -2em;
+}
+
+.txt-lg-capitalize {
+  float: left;
+  letter-spacing: 0.25em;
+  font-size: 3em;
+  line-height: 1;
+}

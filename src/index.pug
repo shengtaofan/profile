@@ -1,0 +1,137 @@
+extends ./template/_layout.pug
+mixin listTemplate(title1, title2, canvas=false)
+  .vh-l-75
+    .row.gx-2.gx-m-4
+      .col-12.bb-img
+        h2
+          span.title-bg=title1
+          =title2
+      .col-12
+        ul.list-group.list-group-flush.divide-line-h
+          block
+    if canvas
+      canvas.abs.hidden.block-l(id=canvas)
+
+block var
+  - file = 'index'
+  - project = 'profile'
+  - primary = '#78cc6d'
+block head
+  script(async src='https://www.googletagmanager.com/gtag/js?id=G-VNP902EX24')
+  script.
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VNP902EX24');
+block body
+  include ./template/page/book.pug
+  include ./template/page/chapter.pug
+  include ./template/page/journal.pug
+  include ./template/page/conference.pug
+  include ./template/page/project.pug
+  -
+    let headerNav =
+    [
+      {id:'about', itemCls:'br-img br-img-xl-0 px-0', icon: 'fa-user', active},
+      {id:'profile', itemCls:'br-img br-img-xl-0 px-0', icon: 'fa-id-card'},
+      {id:'book', itemCls:'br-img br-img-xl-0 px-0', icon: 'fa-book'},
+      {id:'chapter', itemCls:'br-img br-img-xl-0 px-0', icon: 'fa-newspaper-o'},
+      {id:'journal', itemCls:'br-img br-img-xl-0 px-0', icon: 'fa-bar-chart'},
+      {id:'conf', itemCls:'br-img br-img-xl-0 px-0', icon: 'fa-flask'},
+      {id:'project', itemCls:'br-img br-img-xl-0 px-0', icon: 'fa-calendar'}
+    ]
+  .parallax
+  .container.py-1.py-l-6
+    .row.gy-3.gy-l-0.jc-center
+      .col-l-5.col-xl-3
+        .row.txt-center
+          .col-xl-3.fixed-nav
+            +list({ id: 'list-tab', listCls: 'bg-theme radius-top radius-xl divide-line-h-xl', items: headerNav, horizontal: 'xl', flush, offConsole })
+              each navItem in headerNav
+                - const { id, icon } = navItem
+                +slot(id)
+                  span.fa.block.txt-xl(class=icon)
+                  span.txt-sm.hidden.inline-m.hidden-l.inline-xl=id
+          .col-xl-9
+            .bg-theme.radius-top-xl.radius-bottom.pb-4
+              .clip.-mb-7.-mb-m-8.-mb-l-7.mb-xl-2
+                img.img-fluid.radius-top-xl(src='./img/photo.jpg', alt='范聖韜教授', title='范聖韜教授')
+              h1.txt-title.mb-m-1 范聖韜
+                span.txt-subtitle.pl-2 教授
+                a.txt-reset.h2.txt-xl.block.mb-m-1(href="https://www.gipa.ntnu.edu.tw/index.php/faculty02/#pg-3934-3", title="表藝所") 表演藝術研究所暨
+                  span.block-xl 學士學位學程
+                span.h2.txt-xl.mb-2.block 國立臺灣師範大學
+              .row.dir-top.ac-center.txt-left.gy-3.gy-l-2
+                .col-auto
+                  a.py-4.py-l-0(href="mailto:fanst@ntnu.edu.tw")
+                    span.i-block.fa.fa-envelope.fa-1x.txt-center.mr-1(style='width:1rem')
+                    |fanst@ntnu.edu.tw
+                .col-auto
+                  a.py-4.py-l-0(href="tel:0277495490")
+                    span.i-block.fa.fa-phone.fa-1x.txt-center.mr-1(style='width:1rem')
+                    |02-77495490
+      .col-l-7.col-xl-9
+        .bg-theme.bg-grid.radius.py-4
+          +listTabPane({ contents:  headerNav})
+            +slot(headerNav[0].id)
+              include ./template/page/about.pug
+              canvas#samurai.abs.hidden.block-l
+            +slot(headerNav[1].id)
+              include ./template/page/profile.pug
+            +slot(headerNav[2].id)
+              +listTemplate('學術', '專書', 'piano')
+                each book in books
+                  li.list-group-item.px-2
+                    p.subtitle-bg
+                      time=book.year
+                    h3=book.topic
+                    p.txt-right
+                      a(href=book.href, target='_blank', title=book.publisher, rel='nofollow')=book.publisher
+
+            +slot(headerNav[3].id)
+              +listTemplate('學術','專書篇章')
+                each chapter in chapters
+                  li.list-group-item.px-2
+                    p.subtitle-bg
+                      time=chapter.year
+                    h3=chapter.chapter
+                    p=chapter.book
+                    p.txt-right=chapter.publisher
+            +slot(headerNav[4].id)
+              +listTemplate('期刊','論文')
+                each journal in journals
+                  li.list-group-item.px-2
+                    p.subtitle-bg
+                      time=journal.year
+                    h3=journal.topic
+                    p.txt-right
+                      a(href=journal.href target='_blank' title=journal.pub, rel='nofollow')=journal.pub
+            +slot(headerNav[5].id)
+              +listTemplate('研討會','論文')
+                each conference in conferences
+                  li.list-group-item.px-2
+                    p.subtitle-bg
+                      time=conference.year
+                    h3!=conference.paper
+                    p=conference.conference
+                    p.txt-right=conference.organizer
+            +slot(headerNav[6].id)
+              +listTemplate('學術','研究計畫')
+                each project in projects
+                  li.list-group-item.px-2
+                    p.subtitle-bg
+                      time=project.date
+                    h3=project.resource
+                    p=project.project
+  //- -
+  //-   const imgDesc =
+  //-   [
+  //-     '武士遊戲&reg;',
+  //-     '武士遊戲&reg;戰役之一',
+  //-     '武士遊戲&reg;戰役之二',
+  //-     '武士遊戲&reg;戰役之三',
+  //-     '武士遊戲&reg;戰役之四'
+  //-   ]
+  //- +modal({ id:'modal-carousel', label:'modal-carousel-label', size: 'xl', btnNone })
+  //-   +slot('body')
+  //-     +carousel({ id: 'carousel-activity', control, indicators })
+  //-       - for(let i = 0; i < 5; i++)
+  //-         +slide({ imgSrc: './img/activity'+i+'.jpg', caption:imgDesc[i] })
+  //-           figcaption.txt-sm 節錄《表演藝術教材教法與企業組織引導技術》9-11頁，五南圖書出版股份有限公司。

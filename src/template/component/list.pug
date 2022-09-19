@@ -1,0 +1,169 @@
+include ./tabpane.pug
+
+mixin list({ id, listCls, items=[], flush, tag, numbered, links, horizontal, offConsole }={})
+  - const hasArg = OwnArg(arguments)
+  - const hasLink = items.some(attr=> attr.hasOwnProperty('href'))
+  - const hasButton = items.some(attr=> attr.tag==='button')
+  - const groupId = hasArg('id', id)
+  - const groupTag = (hasButton || hasLink || groupId || tag) ? 'div' : hasArg('numbered') ? 'ol' : 'ul'
+  - const horizontalCls = hasArg('horizontal', `list-group-horizontal${horizontal ? '-'+horizontal : ''}`)
+  - const classlist = [ 'list-group', horizontalCls, hasStateClass(hasArg, [ 'flush', 'numbered' ], 'list-group-') ]
+  - const role = hasArg('id', 'tablist')
+
+  - hasArg('offConsole') || hasArg('id') && console.log('\x1b[33m%s\x1b[0m', 'Add attribute role=\'tabpanel\' on container.')
+  - const slots = slotMap()
+
+  mixin listItem({ id, tag, text='', link='#', active, disabled, itemCls } = [{}])
+    - const itemhasArg = OwnArg(arguments)
+    - const state = hasStateClass(itemhasArg, ['active', 'disabled'] )
+    -
+      const aria = id ? null : attrStr(itemhasArg, {
+        current: 'active',
+        disabled: 'disabled'
+        }, 'aria')
+
+    if tag === 'button'
+      button.list-group-item.list-group-item-action(class=[state.filter(cls=>cls!=='disabled')] disabled=itemhasArg('disabled') type='button')&attributes(aria)=text
+        block
+        - slots.use(id)
+    else if tag === 'a' || hasLink || groupId
+      -
+        const tabProps = id && {
+          id: `list-${id}-list`,
+          'data-bs-toggle': 'list',
+          href: `#list-${id}`,
+          role: 'tab',
+          'aria-controls': `list-${id}`
+        }
+      a.list-group-item.list-group-item-action(class=[state, itemCls] href=link title=text || tabProps&&tabProps.id tabindex=itemhasArg('disabled', '-1'))&attributes(aria, tabProps)=text
+        block
+        - slots.use(id)
+    else
+      li.list-group-item(class=[state, itemCls])&attributes(aria)=text
+        block
+        - slots.use(id)
+
+  #{groupTag}(id=groupId class=[classlist, listCls] role=role)
+    block
+    - slots.use('group')
+    each item in items
+      +listItem( item )
+
+//- .container
+  .row
+    //- .col-l-3
+      +list({ items: [
+              {  text: 'An active item', active },
+              {  text: 'A disabled item', disabled },
+              {  text: 'A third item' },
+              {  text: 'And a fifth one' },
+          ]})
+    //- .col-l-3
+      +list({ items: [
+              { href: '#', text: 'The current link item', active },
+              { href: '#', text: 'A disabled link item', disabled },
+              { href: '#', text: 'A third link item' },
+              { href: '#', text: 'A fourth link item' },
+          ]})
+    //- .col-l-3
+      +list({ items: [
+              { tag: 'button', text: 'The current button', active },
+              { tag: 'button', text: 'A disabled button item', disabled },
+              { tag: 'button', text: 'A third button item' },
+              { tag: 'button', text: 'A fourth button item' },
+          ]})
+    //- .col-l-3
+      +list({ numbered,
+              flush,
+              items: [
+              { text: 'Cras justo odio' },
+              { text: 'Cras justo odio' },
+              { text: 'Cras justo odioMessages' },
+              { text: 'Cras justo odio' },
+          ]})
+    //- .col-l-3
+      +list({numbered})
+        - for(let i = 0; i < 3; i++)
+          +listItem({itemCls:'d-flex justify-content-between align-items-start'})
+            .ms-2.me-auto
+              .fw-bold Subheading
+              |Cras justo odio
+            |
+            |
+            span.badge.bg-primary.rounded-pill 14
+    .col-l-9
+      each size in ['', 's', 'm', 'l', 'xl']
+        +list({ horizontal: size,
+                items: [
+                { text: 'An item' },
+                { text: 'A second item' },
+                { text: 'Cras justo odio' },
+                { text: 'A third item' },
+            ]})
+    //- .col-l-4
+      +list({ tag: 'div'})
+        +listItem({tag:'a', active})
+          .d-flex.w-100.justify-content-between
+            h5.mb-1 List group item heading
+            small 3 days ago
+          p.mb-1 Some placeholder content in a paragraph.
+          small And some small print.
+        +listItem({tag:'a'})
+          .d-flex.w-100.justify-content-between
+            h5.mb-1 List group item heading
+            small 3 days ago
+          p.mb-1 Some placeholder content in a paragraph.
+          small And some small print.
+    //- .col-l-4
+      +list()
+        +listItem()
+          input.form-check-input.me-1(type='checkbox' name='checkbos' aria-label='...')
+          | First checkbox
+
+        label.list-group-item
+          input.form-check-input.me-1(type='checkbox')
+          |
+          |First checkbox
+    //- -
+      let listItems =  [
+          { id: 'home', text: 'Home', active },
+          { id: 'profile', href:'#', text: 'Profile' },
+          { id: 'messages', text: 'Messages' },
+          { id: 'settings', text: 'Settings', },
+        ]
+    //- .row(role='tabpanel')
+      .col-l-4
+        +list({ id: 'list-tab', items: listItems })
+      .col-l-8
+        +listTabPane({ contents:  listItems})
+          each item, i in listItems
+            - const { id, text } = item
+            +slot(id)
+              p #{id} Some placeholder content in a paragraph relating to "Settings". And some more content, used here just to pad out and fill this tab panel. In production, you would obviously have more real content here. And not just text. It could be anything, really. Text, images, forms.
+
+//- script.
+  (_=>_())(()=>{
+    let { hash, pathname: url } = location
+    function tabTrigger(hash){
+      const tab = document.getElementById(`${hash.split('#')[1]}-list`)
+      new bootstrap.Tab(tab).show()
+    }
+    if (hash) {
+      tabTrigger(hash)
+    }
+    document.getElementById('list-tab').addEventListener('click', ({target:t})=> {
+      location.hash = t.hash
+      hash = t.hash
+      //- history.replaceState(null, null, t.hash)
+    })
+    Array.prototype.forEach.call(document.querySelectorAll('.tab-trigger-js'), el=>{
+      el.addEventListener('click',function(e){
+        const {pathname: href, hash: anchor } = this
+        if(href!==url) return
+        e.preventDefault()
+        tabTrigger(anchor)
+        location.hash = anchor
+      })
+    });
+
+  })

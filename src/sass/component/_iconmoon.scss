@@ -1,0 +1,139 @@
+$icomoon-font-family: "icomoon" !default;
+$icomoon-font-path: "../font" !default;
+
+$fa-music: "\f001";
+$fa-user: "\f007";
+$fa-flag: "\f024";
+$fa-book: "\f02d";
+$fa-calendar: "\f073";
+$fa-bar-chart: "\f080";
+$fa-trophy: "\f091";
+$fa-phone: "\f095";
+$fa-briefcase: "\f0b1";
+$fa-flask: "\f0c3";
+$fa-envelope: "\f0e0";
+$fa-university: "\f19c";
+$fa-graduation-cap: "\f19d";
+$fa-newspaper-o: "\f1ea";
+$fa-paint-brush: "\f1fc";
+$fa-leanpub: "\f212";
+$fa-handshake-o: "\f2b5";
+$fa-id-card: "\f2c2";
+
+
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.fa {
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.fa-1x { font-size: 1em; }
+.fa-2x { font-size: 2em; }
+.fa-3x { font-size: 3em; }
+.fa-music {
+  &:before {
+    content: $fa-music;
+  }
+}
+.fa-user {
+  &:before {
+    content: $fa-user;
+  }
+}
+.fa-flag {
+  &:before {
+    content: $fa-flag;
+  }
+}
+.fa-book {
+  &:before {
+    content: $fa-book;
+  }
+}
+.fa-calendar {
+  &:before {
+    content: $fa-calendar;
+  }
+}
+.fa-bar-chart {
+  &:before {
+    content: $fa-bar-chart;
+  }
+}
+.fa-trophy {
+  &:before {
+    content: $fa-trophy;
+  }
+}
+.fa-phone {
+  &:before {
+    content: $fa-phone;
+  }
+}
+.fa-briefcase {
+  &:before {
+    content: $fa-briefcase;
+  }
+}
+.fa-flask {
+  &:before {
+    content: $fa-flask;
+  }
+}
+.fa-envelope {
+  &:before {
+    content: $fa-envelope;
+  }
+}
+.fa-university {
+  &:before {
+    content: $fa-university;
+  }
+}
+.fa-graduation-cap {
+  &:before {
+    content: $fa-graduation-cap;
+  }
+}
+.fa-newspaper-o {
+  &:before {
+    content: $fa-newspaper-o;
+  }
+}
+.fa-paint-brush {
+  &:before {
+    content: $fa-paint-brush;
+  }
+}
+.fa-leanpub {
+  &:before {
+    content: $fa-leanpub;
+  }
+}
+.fa-handshake-o {
+  &:before {
+    content: $fa-handshake-o;
+  }
+}
+.fa-id-card {
+  &:before {
+    content: $fa-id-card;
+  }
+}

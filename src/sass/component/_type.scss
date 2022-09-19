@@ -1,0 +1,125 @@
+//
+// Headings
+//
+h1,
+.txt-heading {
+  @include font-size($h1-font-size);
+}
+
+h2,
+.txt-title {
+  @include font-size($h2-font-size);
+}
+
+h3,
+.txt-subtitle {
+  @include font-size($h3-font-size);
+}
+
+h4,
+.txt-xl {
+  @include font-size($h4-font-size);
+}
+
+h5,
+.txt-lg {
+  @include font-size($h5-font-size);
+}
+
+h6,
+.txt-md {
+  @include font-size($h6-font-size);
+}
+
+h5,
+.txt-lg {
+  font-size: 1rem;
+}
+
+h6,
+.txt-md {
+  font-size: 0.875rem;
+}
+
+.txt-sm {
+  font-size: 0.75rem !important;
+}
+
+// .txt-xs {
+//   font-size: 0.75rem !important; }
+
+.lead {
+  @include font-size($lead-font-size);
+  font-weight: $lead-font-weight;
+}
+
+// Type display classes
+@each $display, $font-size in $display-font-sizes {
+  .display-#{$display} {
+    @include font-size($font-size);
+    font-weight: $display-font-weight;
+    line-height: $display-line-height;
+  }
+}
+
+//
+// Emphasis
+//
+.small {
+  @extend small;
+}
+@if not list-has($enable-root-tag, mark) {
+  .mark {
+    @extend mark;
+  }
+}
+//
+// Lists
+//
+
+.list-unstyled {
+  @include list-unstyled();
+}
+
+// Inline turns list items into inline-block
+.list-inline {
+  @include list-unstyled();
+}
+.list-inline-item {
+  display: inline-block;
+
+  &:not(:last-child) {
+    margin-right: $list-inline-padding;
+  }
+}
+
+//
+// Misc
+//
+
+// Builds on `abbr`
+.initialism {
+  @include font-size($initialism-font-size);
+  text-transform: uppercase;
+}
+
+// Blockquotes
+.blockquote {
+  margin-bottom: $blockquote-margin-y;
+  @include font-size($blockquote-font-size);
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.blockquote-footer {
+  margin-top: -$blockquote-margin-y;
+  margin-bottom: $blockquote-margin-y;
+  @include font-size($blockquote-footer-font-size);
+  color: $blockquote-footer-color;
+
+  &::before {
+    content: '\2014\00A0'; // em dash, nbsp
+  }
+}

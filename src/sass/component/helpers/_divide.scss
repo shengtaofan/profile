@@ -1,0 +1,11 @@
+.divide-x > * {
+  border: 0.5px solid $border-color;
+  border-top: none;
+  border-bottom: none;
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    @include divide($grid-columns/2, $breakpoint)
+  }
+}

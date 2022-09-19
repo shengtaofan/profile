@@ -1,0 +1,12 @@
+//
+// Text truncation
+//
+
+.text-truncate {
+  @include text-truncate();
+}
+
+// Misc
+.txt-hide {
+  @include text-hide();
+}

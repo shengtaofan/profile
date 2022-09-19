@@ -1,0 +1,31 @@
+@mixin divide($columns, $breakpoint: '', $color: initial) {
+  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+  %br#{$infix}-transparent{
+    border-right-color: transparent;
+  }
+  %bl#{$infix}-transparent{
+    border-left-color: transparent;
+  }
+  %br#{$infix}-color{
+    border-right-color: $color;
+  }
+  %bl#{$infix}-color{
+    border-left-color: $color;
+  }
+  @for $i from 2 through $columns {
+    .divide-x#{$infix}-#{$i} > * {
+      &:nth-child(#{$i}n) {
+        @extend %br#{$infix}-transparent;
+      }
+      &:nth-child(#{$i}n+1) {
+        @extend %bl#{$infix}-transparent;
+      }
+      &:not(:nth-child(#{$i}n)) {
+        @extend %br#{$infix}-color;
+      }
+      &:not(:nth-child(#{$i}n+1)) {
+        @extend %bl#{$infix}-color;
+      }
+    }
+  }
+}

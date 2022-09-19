@@ -1,0 +1,59 @@
+html {
+  &::-webkit-scrollbar {
+    width: 20px;
+    height: 50px;
+    &-button {      //mark 按鈕
+      width: 20px;
+      height: 40px;
+      background-color: $danger;
+      // &:decrement,
+      // &:increment
+    }
+    &-thumb {        //mark 滑塊
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+      border-radius: 20px;
+      background-color: $primary;
+    }
+    &-track {        //mark 滑軌背景
+      background-color: $warning;
+      &-piece {    //mark 滑軌
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+        border-radius: 20px;
+        background-color: $success;
+        height: 20px
+      }
+    }
+    // &-corner {
+    //   background-color: $secondary;
+    // }
+  }
+}
+// html::-webkit-scrollbar-button
+  // &:vertical,
+  // &:horizontal
+  //   &:decrement
+  //     background-color: cyan
+
+.scrollba-x {
+  &::-webkit-scrollbar:horizontal {
+    height: 20px
+  }
+  &::-webkit-scrollbar-button:horizontal {
+    width: 0;
+  }
+  &::-webkit-scrollbar-track-piece {
+    background-color: $danger;
+  }
+}
+
+.scroll-container {
+  width: 100%;
+}
+.scroll-nowraps {
+  flex-wrap: nowrap;
+  align-items: center;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}

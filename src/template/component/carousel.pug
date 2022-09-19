@@ -1,0 +1,38 @@
+mixin carousel({ id='carouselExampleControls', fade, indicators }=[{}])
+  - let i = 0
+  - const hasArg = OwnArg(arguments)
+  .carousel.slide(id=id data-bs-ride='carousel')
+    .carousel-inner
+      mixin slide({ imgSrc, interval, caption })
+        - const hasArg = OwnArg(arguments)
+        .carousel-item(class={ 'active': !i } data-bs-interval=interval)
+          figure
+            img.d-block.w-100(src=imgSrc alt!=caption, title!=caption)
+            - i++
+            mixin caption({ capCls='d-none d-m-block', caption } = [{}])
+              - const hasArg = OwnArg(arguments)
+              .carousel-caption(class=capCls)
+                if hasArg('caption')
+                  h4.txt-white!=caption
+                block
+            if hasArg('caption')
+              +caption({ caption })
+                block
+            else if block
+              .carousel-caption
+                block
+
+      mixin indicators()
+        .carousel-indicators
+          - for(let j = 0; j < i; j ++)
+            button(class={ 'active': !j } type='button' data-bs-target=`#${id}` data-bs-slide-to=j aria-current='true' aria-label=`Slide ${j}`)
+      mixin control()
+        each text, abbr in { prev: 'Previous', next: 'Next' }
+          button(class=`carousel-control-${abbr}` type='button' data-bs-target=`#${id}` data-bs-slide=abbr)
+            span(class=`carousel-control-${abbr}-icon` aria-hidden='true')
+            span.visually-hidden=text
+      block
+    if hasArg('indicators')
+      +indicators()
+    if hasArg('control')
+      +control()

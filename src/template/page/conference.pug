@@ -1,0 +1,160 @@
+-
+  const conferences =
+  [
+    {
+      year: 2022,
+      paper: '表演藝術教學法創新之研究',
+      conference: '後疫情時代教學創新示範國際研討會',
+      organizer: '國立雲林科技大學教學卓越中心'
+    },
+    {
+      year: 2022,
+      paper: '通識課程與表演藝術教學法中的教學空間',
+      conference: '通識課程與跨領域藝術教學學術研討會',
+      organizer: '國立臺灣藝術大學通識教育中心'
+    },
+    {
+      year: 2021,
+      paper: '微型教學在國民中學表演藝術科職前雙語師資培育的應用',
+      conference: '第九屆師資培育國際學術研討會',
+      organizer: '教育部'
+    },
+    {
+      year: 2021,
+      paper: '企業組織系統排列之焦點現象融入表演藝術教育之跨域研究',
+      conference: '美感跨域與創新教學學術研討會',
+      organizer: '國立臺灣藝術大學藝術與人文教學研究所'
+    },
+    {
+      year: 2021,
+      paper: '音畫融入表演藝術教材教法之教學實踐研究',
+      conference: '教學創新示範學校國際研討會—智慧教育世代的教學實踐典範',
+      organizer: '國立雲林科技大學教學卓越中心'
+    },
+    {
+      year: 2020,
+      paper: '企業組織排列融入表演藝術教材教法之教學實踐研究',
+      conference: '教學創新示範學校國際研討會—新世代的教學實踐典範',
+      organizer: '國立雲林科技大學教學卓越中心'
+    },
+    {
+      year: 2019,
+      paper: "英雄面具（Hero/Heroline' s Mask）—表演藝術為本的教學法促進領導素養與跨域溝通",
+      conference: '美感素養與創新教學學術研討會',
+      organizer: '國立臺灣藝術大學'
+    },
+    {
+      year: 2019,
+      paper: '商管教育之藝企合作教學實踐研究',
+      conference: '教學創新示範學校國際研討會—創建新世代的高教深耕教與學',
+      organizer: '國立雲林科技大學'
+    },
+    {
+      year: 2018,
+      paper: '遊戲劇場促進表演藝術師資培育生的專業素養',
+      conference: '教育高階論壇國際研討會—核心素養的教學與評量',
+      organizer: '國立臺南大學'
+    },
+    {
+      year: 2018,
+      paper: '國民中學表演藝術教師在職進修教學實務研究—用布開啟想像暨創造力',
+      conference: 'TERA-GACC 2018 Conference 華人社會的創造力表現—過去、現在與未來',
+      organizer: '國立中山大學'
+    },
+    {
+      year: 2018,
+      paper: '表演藝術師資培育與素養導向的面具教學法',
+      conference: 'TERA-GACC 2018 Conference 迎向教與學素養國際研討會',
+      organizer: '國立中山大學'
+    },
+    {
+      year: 2018,
+      paper: '表演藝術師資培育與系統排列',
+      conference: '文化與科技創新學術研討會—「在地與跨域的對話」',
+      organizer: '國立臺北科技大學'
+    },
+    {
+      year: 2018,
+      paper: '素養導向的表演藝術師資培育—教育劇場促進參與',
+      conference: '2018年E時代教育國際學術研討會—素養導向教育的理念與轉化：國際趨勢與在地實踐',
+      organizer: '國立臺中教育大學'
+    },
+    {
+      year: 2018,
+      paper: '精進臺灣國民中學表演藝術師資培育的教材教法—設計Rasaboxes教學模組之個案研究',
+      conference: '第六屆師資培育國際學術研會—各科教材教法',
+      organizer: '國立屏東大學'
+    },
+    {
+      year: 2018,
+      paper: '即興創造力訓練融入表演藝術教師在職進修課程之研究',
+      conference: '創造力與STEAM及自造教育國際研討會',
+      organizer: '國立臺灣師範大學學習科學跨國頂尖研究中心'
+    },
+    {
+      year: 2018,
+      paper: '教育劇場促進合作—品格教育融入「科技與人文社會」課程',
+      conference: '人文藝術議題教育與創新教學學術研討會',
+      organizer: '國立臺灣藝術大學'
+    },
+    {
+      year: 2018,
+      paper: '素養導向的表演藝術師資培育—兒童劇場促進互動',
+      conference: '十二年國教素養導向課程深耕與教學精進之實踐與議題學術研討會',
+      organizer: '國立高雄師範大學'
+    },
+    {
+      year: 2017,
+      paper: '體驗教育於藝企合作之應用',
+      conference: '亞洲體驗教育學會第12屆年會',
+      organizer: '國立臺灣師範大學'
+    },
+    {
+      year: 2017,
+      paper: '展演文化創意產業',
+      conference: '劇場藝術與管理國際學術研討會—「整體藝術」之道與藝的當代探索美學全球化時代劇場藝術的跨界與整合',
+      organizer: '國立中山大學'
+    },
+    {
+      year: 2017,
+      paper: '教育劇場融入師資職前培育課程—高級中等學校表演藝術主修專門科目「說唱文化藝術」之個案研究',
+      conference: '第五屆師資培育國際學術研討會—各科教材教法',
+      organizer: '淡江大學'
+    },
+    {
+      year: 2017,
+      paper: '跨領域統整與教學自信—以中等學校表演藝術師資職前培育課程為例',
+      conference: '十二年國教人文與藝術跨領域教學創新學術研討會',
+      organizer: '國立臺灣藝術大學'
+    },
+    {
+      year: 2016,
+      paper: 'Drama Therapy for Organizational Development in Taiwan',
+      conference: 'International Conference on Innovation Studies― Human-centered Indigenous Innovation: Trans-Disciplinary Dialogue',
+      organizer: 'National Chengchi University'
+    },
+    {
+      year: 2016,
+      paper: 'Human Potential Development in Performing Arts Teacher Training: A Case Study of The Samurai Game&reg;',
+      conference: 'The 4th International Conference on Teacher Education focusing on Teaching Methods and Materials',
+      organizer: 'National Taiwan University'
+    },
+    {
+      year: 2016,
+      paper: 'Performative Pedagogy in Business Contexts',
+      conference: 'NYU Forum on Educational Theatre',
+      organizer: 'New York University'
+    },
+    {
+      year: 2015,
+      paper: 'Performing Historical Figures as Performing Arts Pedagogy',
+      conference: 'The 3rd International Conference on Teacher Education focusing on Teaching Methods and Materials',
+      organizer: 'National Taiwan Normal University'
+    },
+    {
+      year: 2015,
+      paper: 'Performing Taiwanese Cultural Festivals',
+      conference: 'International Conference of Drama Education & Application: The Encounter and Challenge of Globalization in Asia-Pacific Region',
+      organizer: 'National University of Tainan'
+    }
+  ]

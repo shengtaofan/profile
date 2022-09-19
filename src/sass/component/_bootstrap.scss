@@ -1,0 +1,63 @@
+
+// scss-docs-start import-stack
+// Configuration
+@import 'functions';
+@import 'variables';
+@import 'mixins';
+@import 'utilities';
+
+// Layout & components
+// @import 'root';
+@import 'reboot';
+@import 'type';
+@import 'images';
+@import 'grid';
+// @import 'tables';
+// @import 'forms';
+@import 'buttons';
+@import 'transitions';
+// @import 'dropdown';
+// @import 'button-group';
+@import 'nav';
+// @import 'navbar';
+// @import 'card';
+// @import 'accordion';
+// @import 'breadcrumb';
+// @import 'pagination';
+// @import 'badge';
+// @import 'alert';
+// @import 'progress';
+@import 'list-group';
+@import 'close';
+// @import 'toasts';
+@import 'modal';
+// @import 'tooltip';
+// @import 'popover';
+@import 'carousel';
+// @import 'spinners';
+// @import 'offcanvas';
+
+// Helpers
+@import 'helpers';
+
+// Utilities
+@import 'utilities/api';
+// scss-docs-end import-stack
+
+// @import 'cell';
+
+
+
+
+
+body {
+  --trY : 0px;
+}
+@include media-breakpoint-up(l) {
+  body:hover{
+    --trY : -1920px;
+  }
+  .bubble{
+    transition: transform 60s cubic-bezier(.7,0,.4,1)
+  }
+}

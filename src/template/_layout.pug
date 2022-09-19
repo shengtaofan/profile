@@ -1,0 +1,61 @@
+include ./_seo.pug
+
+
+include ./component/slot.pug
+include ./component/list.pug
+include ./component/carousel.pug
+include ./component/modal.pug
+//- include ./_header
+
+
+-let primary = 'transparent'
+-let secondary = 'blue'
+-let headerH1 = true
+-let project = 'profile'
+-let file = ''
+-let web ='template'
+-let domain = 'https://shengtaofan.github.io/'
+-let root = project+'/'
+block var
+
+if !file
+  -console.log('block var\n file = ""')
+if !project
+  -console.log('project = ""')
+if primary === 'transparent'
+  -console.log('primary = "transparent"')
+
+-let {title, desc} = seo[file]
+-
+  const Person =
+    {
+      "@context" : "https://schema.org",
+      "@type" : "Person",
+      "name" : "范聖韜",
+      "jobTitle": "教授",
+      "affiliation": "國立臺灣師範大學",
+      "url" : domain + project,
+      "sameAs" : [
+        "http://140.122.64.97/members/bio.php?PID=9",
+        "https://tw.linkedin.com/in/shengtaofan",
+        "https://orcid.org/0000-0003-3255-8722"
+        ],
+      "email":"fanst@ntnu.edu.tw",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "大安區和平東路一段162號",
+        "addressLocality": "台北市",
+        "addressRegion": "臺灣省"
+        }
+      }
+doctype html
+html(lang="zh-Hant-TW")
+  head
+    include ./_head
+    block head
+  script(type='application/ld+json').
+    !{JSON.stringify(Person)}
+  body
+    block body
+    script(src="./js/vendors.js")
+    script(src="./js/script.js")

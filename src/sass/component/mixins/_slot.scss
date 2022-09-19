@@ -1,0 +1,46 @@
+
+@mixin slotContentStyle($prefix, $style) {
+  #{$prefix} {
+    @each $attr, $val in $style {
+      #{ $attr}: #{$val};
+      @content;
+    }
+  }
+}
+@mixin slot($styleMap) {
+  @each $el, $style in map-get($styleMap, style) {
+    $prefix: #{if(map-get($styleMap, extends), & + $el, $el)};
+    @if (map-get($styleMap, extends)) {
+      @at-root {
+        @include slotContentStyle($prefix, $style) {
+          @content;
+        }
+      }
+    } @else {
+      @include slotContentStyle($prefix, $style) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin mix($name, $hover: '',  $focus: $hover){
+  @content;
+  @if ($hover!='') {
+    @include slot($hover){
+    }
+  }
+}
+
+.btn-{
+  $hover: (extends:true,
+    style:(
+      '.primary': (background: black, color: cyan),
+      '.secondary': (background: black, color: red)
+    )
+  );
+  &:hover{
+    @include mix('primay', $hover){
+    }
+  }
+}

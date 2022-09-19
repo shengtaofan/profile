@@ -1,0 +1,11 @@
+%line-clamp {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+@for $line from 1 through 5 {
+  .line-clamp-#{$line} {
+    @extend %line-clamp;
+    -webkit-line-clamp: #{$line};
+  }
+}
