@@ -1,4 +1,4 @@
-function isBetween (val, range) { return (val - range[0]) * (val - range[1]) < 0 }
+/* function isBetween (val, range) { return (val - range[0]) * (val - range[1]) < 0 }
 function gradient (gd, stops) {
   for (const objColor of stops) {
     let [stop] = Object.entries(objColor)
@@ -8,7 +8,7 @@ function gradient (gd, stops) {
   return gd
 }
 (function () {
-  if (innerWidth < 1366) { return }
+  if (innerWidth < 1366) { }
   function initPianoCanvas () {
     const piano = document.getElementById('piano')
     const pianoPrev = piano.previousElementSibling
@@ -175,4 +175,4 @@ function gradient (gd, stops) {
     window.removeEventListener('keydown', keydownHandler)
   })
 }
-)()
+)() */

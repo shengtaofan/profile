@@ -76,7 +76,6 @@ export const babel = cb => {
 }
 
 export const vendors = cb => {
-  console.log('update bootstrap lib')
   g.src([...bower(), lib]) //main-bower-files:抓取套件主檔案
     .pipe($.order(['svgxuse.js', 'jquery.js', 'popper.js', 'bootstrap.js']))
     .pipe($.concat('vendors.js'))
@@ -117,11 +116,17 @@ export const font = cb => {
   cb()
 }
 export const move = cb => {
-  require('fs').writeFileSync('dist/.nojekyll','')
   g.src(['./static/**/*.{txt,xml}',])
   .pipe(g.dest('./dist'))
+
   cb()
 }
+
+export const nojekyll = cb => {
+  require('fs').writeFileSync('dist/.nojekyll','')
+  cb()
+}
+
 export const deploy = cb => {
   g.src('./dist/**/*')
   .pipe($.ghPages())
@@ -131,9 +136,6 @@ export const clean = cb => {
   del([ './dist/**/*.map'], { read: false })
   cb()
 }
-
-
-
 export function watch() {
   g.watch('./src/*.pug', pug)
   g.watch('./src/template/*.pug', template)
@@ -141,8 +143,6 @@ export function watch() {
   g.watch('./src/js/**/*.js', babel)
   g.watch('./src/img/**/*.{jpg,png,gif}', imageMin)
 }
-
-
 exports.default = g.parallel(
   pug,
   sass,
@@ -151,6 +151,6 @@ exports.default = g.parallel(
   watch,
   browserSync
 )
-exports.build = g.series(clean, babel, sass, font,move)
+exports.build = g.series(clean, pug, babel, font, move, nojekyll, sass)
 
 exports.assets = g.parallel(imageMin)

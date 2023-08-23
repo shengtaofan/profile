@@ -1,6 +1,11 @@
 function between (a, b = 0) {
   return Math.floor(Math.random() * (Math.max(a, b) - Math.min(a, b) + 1)) + Math.min(a, b)
 }
+function isBetween (n, a, b) {
+  const min = Math.min(a, b)
+  const max = Math.max(a, b)
+  return min < n && n < max
+}
 (function () {
   function tabTrigger (hash) {
     const tab = document.getElementById(`${hash.split('#')[1]}-list`)
@@ -32,7 +37,6 @@ function between (a, b = 0) {
       location = this.href
     })
   })
-
   // document.getElementById('modal-carousel').addEventListener('shown.bs.modal', function (event) {
   //   gtag('event', 'modal-carousel-shown', {
   //     'event_category': 'interactive',
@@ -40,11 +44,6 @@ function between (a, b = 0) {
   //   })
   //   this.addEventListener('contextmenu', function (e) { e.preventDefault() })
   // }, { once: true })
-  function isBetween (n, a, b) {
-    const min = Math.min(a, b)
-    const max = Math.max(a, b)
-    return min < n && n < max
-  }
   const fragment = document.createDocumentFragment()
   for (let i = 0; i < 100; i++) {
     const div = document.createElement('div')

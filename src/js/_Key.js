@@ -1,4 +1,4 @@
-class PianoKey {
+/* class PianoKey {
   constructor (args) {
     const def = { isPlaying: false }
     Object.assign(def, args)
@@ -90,4 +90,4 @@ class PianoKey {
     this.isPlaying = !this.isPlaying
     return this
   }
-}
+} */

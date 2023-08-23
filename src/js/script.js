@@ -55,14 +55,17 @@
         pixelGroups[randomId].push(new Particle({ color, alpha, p0, p1, id, last }))
       }
     }
-
-    frameCount = requestAnimationFrame(update)
+    setTimeout(() => {
+      start = Date.now()
+      then = start
+      frameCount = requestAnimationFrame(update)
+    }, 1500)
   }
 
   const drawingGroups = []
   const fps = 30
   const interval = 1000 / fps
-  const start = Date.now()
+  let start = Date.now()
   let then = start
   let delta
   let timer = 0

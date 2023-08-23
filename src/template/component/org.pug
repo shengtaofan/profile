@@ -1,0 +1,36 @@
+svg.v-top(xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50' space='preserve' width='60')
+  g(fill='none' stroke='#fff' stroke-width='2' stroke-dasharray='0% 100%')
+    path(d='M25,10H15.6V16.7H12.5')/
+    path(d='M25,33.3H17.7')/
+    path(d='M21.9,33.3V40H12.5')/
+    path(d='M18.8,25.7V30.1')/
+    path(d='M28.1,24.3V34.3')/
+    path(d='M28.1,30H34.4')/
+    path(d='M34.4,25.7V34.4')/
+    path(d='M25,36.7H28.1V40H34.4V36.7H37.5')/
+    path(d='M31.3,32.3V34.3')/
+    path(d='M31.3,35.7V37.7')/
+    path(d='M21.9,20H15.6V26.7H12.5')/
+    path(d='M25,18.4H28.1V22.3')/
+    path(d='M28.1,15.7V10H34.4V23.3H37.5')/
+    path(d='M31.4,14.9H34.2')/
+    path(d='M31.3,12.3V17.6')/
+    path(d='M18.8,15.7V20')/
+    path(d='M28.1,20H34.4')/
+    path(d='M31.3,22.3V27.6')/
+    path(d='M18.8,12.3V14.3')/
+    path(d='M18.8,22.3V24.3')/
+    path(d='M21.9,12.3V27.6')/
+    path(d='M25,30H15.6V36.7H19.7')/
+    animate(attributeName='stroke-dasharray' to='100% 100%' dur='0.8s' fill='freeze' begin='top.end')/
+    path(d='M11.5,6.7H38.5')
+      animate#top(attributeName='stroke-dasharray' to='100% 100%' dur='0.8s' fill='freeze')/
+    path(d='M38.5,43.4H11.5')
+      animate(attributeName='stroke-dasharray' to='100% 100%' dur='0.5s' fill='freeze' begin='top.end + 1.5s')/
+    g
+      path(d='M9.4,5.7V44.4')/
+      path(d='M12.5,5.7V44.4')/
+      path(d='M25,5.7V44.4')/
+      path(d='M37.5,5.7V44.4')/
+      path(d='M40.6,5.7V44.4')/
+      animate(attributeName='stroke-dasharray' to='100% 100%' dur='1.5s' fill='freeze' begin='top.end')/
