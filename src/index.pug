@@ -45,24 +45,28 @@ block body
               each navItem in headerNav
                 - const { id, icon } = navItem
                 +slot(id)
-                  span.fa.block.txt-xl(class=icon)
+                  span.fa.i-block.txt-xl(class=icon)
+                  br
                   span.txt-sm.hidden.inline-m.hidden-l.inline-xl=id
           .col-xl-9
             .bg-theme.radius-top-xl.radius-bottom.pb-4
-              .clip.-mb-7.-mb-m-8.-mb-l-7.mb-xl-2
-                img.img-fluid.radius-top-xl(src='./img/photo.jpg', width='100%', height='auto', alt='范聖韜教授', title='范聖韜教授')
-              h1.txt-title.mb-m-1 范聖韜
+              .avatar-clip.clip.-mb-7.-mb-m-8.-mb-l-7.mb-xl-2
+                img.img-fluid.radius-top-xl(src='./img/avatar.png', width='100%', height='auto', alt='范聖韜教授', title='范聖韜教授')
+              h1.txt-title.mb-m-1(style='line-height:1') 范聖韜
                 span.txt-subtitle.pl-2 教授
-                a.txt-reset.h2.txt-xl.block.mb-m-1(href="https://www.gipa.ntnu.edu.tw/index.php/faculty02/#pg-3934-3" target='_blank' title="專任師資") 表演藝術研究所暨
-                  span.block-xl 學士學位學程
-                span.h2.txt-xl.mb-2.block 國立臺灣師範大學
+                br
+                a.txt-reset.h2.txt-xl.mb-m-1(href='https://www.gipa.ntnu.edu.tw/index.php/faculty02/#pg-3934-3' target='_blank' title='專任師資') 表演藝術研究所暨
+                  br
+                  |學士學位學程
+                br
+                a.h2.txt-xl.mb-2(href='https://scholar.lib.ntnu.edu.tw/zh/persons/sheng-tao-fan' target='_blank' title='Sheng-Tao Fan - 國立臺灣師範大學')  國立臺灣師範大學
               .row.dir-top.ac-center.txt-left.gy-3.gy-l-2
                 .col-auto
-                  a.py-4.py-l-0(href="mailto:fanst@ntnu.edu.tw")
+                  a.py-4.py-l-0(href='mailto:fanst@ntnu.edu.tw')
                     span.i-block.fa.fa-envelope.fa-1x.txt-center.mr-1(style='width:1rem')
                     |fanst@ntnu.edu.tw
                 .col-auto
-                  a.py-4.py-l-0(href="tel:0277495490")
+                  a.py-4.py-l-0(href='tel:0277495490')
                     span.i-block.fa.fa-phone.fa-1x.txt-center.mr-1(style='width:1rem')
                     |02-77495490
       .col-l-7.col-xl-9

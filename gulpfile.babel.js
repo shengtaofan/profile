@@ -7,6 +7,7 @@ import minimist from 'minimist'
 import del from 'del'
 import imageminJpegRecompress from 'imagemin-jpeg-recompress'
 import imageminPngquant from 'imagemin-pngquant'
+import sass from 'sass'
 const sync = server.create()
 const $ = loadPlugins()
 
@@ -41,17 +42,18 @@ export const template = cb => {
   cb()
 }
 
-export const sass = cb => {
+export const style = cb => {
+  const sassLoader = $.sass(sass)
   g.src('./src/sass/**/*.s+(a|c)ss')
     .pipe($.plumber())
     .pipe($.sourcemaps.init()) //gulp-sourcemaps: 初始化
     .pipe($.sassLint())
     .pipe($.sassLint.format())
     .pipe($.sassLint.failOnError())
-    .pipe($.sass().on('error', $.sass.logError))
+    .pipe(sassLoader().on('error', sassLoader.logError))
     .pipe($.if(bool, $.groupCssMediaQueries()))
     .pipe($.replace('../../img/', '../img/'))
-    .pipe($.postcss([autoprefixer()])) //gulp-postcss+autoprefixer設定瀏覽器版號
+    // .pipe($.postcss([autoprefixer()])) //gulp-postcss+autoprefixer設定瀏覽器版號
     .pipe($.if(bool, $.cleanCss({ level: 2 }), $.sourcemaps.write('.')))
     .pipe($.if(bool, $.purgecss({ content: ['./dist/**/*.html', './dist/**/*.vue', './dist/**/*.js'] })))
     .pipe(g.dest('./dist/css'))
@@ -139,18 +141,18 @@ export const clean = cb => {
 export function watch() {
   g.watch('./src/*.pug', pug)
   g.watch('./src/template/*.pug', template)
-  g.watch('./src/sass/**/*.s+(a|c)ss', sass)
+  g.watch('./src/sass/**/*.s+(a|c)ss', style)
   g.watch('./src/js/**/*.js', babel)
   g.watch('./src/img/**/*.{jpg,png,gif}', imageMin)
 }
 exports.default = g.parallel(
   pug,
-  sass,
+  style,
   babel,
   vendors,
   watch,
   browserSync
 )
-exports.build = g.series(clean, pug, babel, font, move, nojekyll, sass)
+exports.build = g.series(clean, pug, babel, font, move, nojekyll, style)
 
 exports.assets = g.parallel(imageMin)

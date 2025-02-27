@@ -52,7 +52,7 @@
     "gulp-pug": "^4.0.1",
     "gulp-purgecss": "^1.2.0",
     "gulp-replace": "^1.1.3",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.1.0",
     "gulp-sass-lint": "^1.4.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-svg-sprite": "^1.5.0",
@@ -61,7 +61,8 @@
     "imagemin-jpeg-recompress": "^6.0.0",
     "imagemin-pngquant": "^8.0.0",
     "main-bower-files": "^2.13.3",
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.5",
+    "sass": "^1.77.5"
   },
   "devDependencies": {
     "gh-pages": "^6.0.0"
